@@ -1,0 +1,22 @@
+.cardContainer {
+  background: var(--white);
+  border: 1px solid var(--gray-100);
+
+  .cardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--gray-100);
+
+    * {
+      &:not(:last-child) {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+
+  .cardSection {
+    padding: 1rem;
+  }
+}

@@ -14,6 +14,7 @@
   --green-200: #e7f0c3;
   --green-500: #a4d4ae;
   --green-800: #5bbfba;
+  --blue-100: #f5f5fa;
   --blue-800: #5f6caf;
   --yellow-500: #eba417;
 }
@@ -31,12 +32,15 @@
 }
 
 body {
-  background: var(--white);
+  background: var(--blue-100);
   color: var(--gray-700);
 }
 
 main {
   display: flex;
+  .content {
+    padding: 2rem;
+  }
 }
 
 body,
@@ -56,4 +60,18 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
 }
