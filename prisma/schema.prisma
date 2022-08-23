@@ -17,7 +17,7 @@ model Quote {
   departureDate  String
   returnDate     String
   people         Int
-  transportation String
+  transportation String?
   price          Int?
   status         String
   customer       Customer? @relation(fields: [customerId], references: [id])
