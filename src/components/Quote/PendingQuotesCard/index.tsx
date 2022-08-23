@@ -1,5 +1,4 @@
 import Card from "../../Card"
-import styles from "./styles.module.scss"
 
 const pendingQuotes = [
   { id: "12345678", name: "Katty Abcdefgh", to: "Vancouver", price: "$ 1000.00" },
