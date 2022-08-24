@@ -13,7 +13,7 @@ export default function AddQuickQuoteCard() {
   // const [keyword, setKeyword] = useState({ keyword: "", type: "" })
   // const [airportsSuggestions, setAirportsSuggestions] = useState([])
 
-  const [input, setInput] = useState({
+  const initInput = {
     from: "",
     to: "",
     departureDate: "",
@@ -21,7 +21,8 @@ export default function AddQuickQuoteCard() {
     people: 0,
     transportation: "",
     customerId: ""
-  })
+  }
+  const [input, setInput] = useState(initInput)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const name = e.target.name
@@ -31,9 +32,10 @@ export default function AddQuickQuoteCard() {
     setInput((values) => ({ ...values, [name]: value }))
   }
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-    createQuote({ ...input, people: Number(input.people) })
+    await createQuote({ ...input, people: Number(input.people) })
+    setInput(initInput)
   }
 
   // // handle keyword
