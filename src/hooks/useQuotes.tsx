@@ -13,6 +13,7 @@ interface QuoteWithCustomerName extends Quote {
 interface QuotesContextData {
   quotes: QuoteWithCustomerName[]
   createQuote: (quote: Omit<Prisma.QuoteCreateInput, "status">) => Promise<void>
+  quotateQuote: (id: string, price: number) => Promise<void>
 }
 
 const QuotesContext = createContext<QuotesContextData>({} as QuotesContextData)
@@ -36,9 +37,31 @@ export const QuotesProvider = ({ children }: QuotesProviderProps) => {
 
   const createQuote = async (quoteInput: Omit<Prisma.QuoteCreateInput, "status">) => {
     try {
-      const response = await api.post("/quotes", { ...quoteInput, status: "pending" })
+      const response = await api.post("/quotes", quoteInput)
       const quote = response.data
       setQuotes((prevState) => [...prevState, quote])
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response) {
+          alert(error.response.data)
+        }
+      } else {
+        alert(error)
+      }
+    }
+  }
+
+  const quotateQuote = async (id: string, price: number) => {
+    try {
+      const response = await api.post(`/quotes/quotate/${id}`, { price })
+      const quote = response.data
+      setQuotes((prevState) => {
+        const newState = prevState.map((obj) => {
+          if (obj.id === id) return quote
+          return obj
+        })
+        return newState
+      })
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response) {
@@ -62,7 +85,8 @@ export const QuotesProvider = ({ children }: QuotesProviderProps) => {
             name: `${customer?.lastName}, ${customer?.firstName}`
           }
         }),
-        createQuote
+        createQuote,
+        quotateQuote
       }}
     >
       {children}

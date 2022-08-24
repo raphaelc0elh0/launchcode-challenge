@@ -1,18 +1,27 @@
 import { Prisma } from "@prisma/client"
 import { NextApiRequest, NextApiResponse } from "next"
-import prisma from "../../../services/prisma"
+import prisma from "../../../../services/prisma"
 
-// GET /api/quotes
-// POST /api/quotes
+// POST /api/quotes/quotate/[id]
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
+  const query = req.query
+  const id = query.id as string
+
   try {
     if (req.method === "POST") {
-      const quoteInput = req.body
-      const result = await prisma.quote.create({ data: { ...quoteInput, status: "pending" } })
+      const quotateInput = req.body
+      const result = await prisma.quote.update({
+        where: {
+          id
+        },
+        data: {
+          price: quotateInput.price,
+          status: "quotated"
+        }
+      })
       return res.json(result)
     } else {
-      const result = await prisma.quote.findMany({ include: { customer: true } })
-      return res.json(result)
+      throw Error
     }
   } catch (error) {
     let message = "failed to load data"

@@ -1,6 +1,7 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
 import Card from "../../components/Card"
+import UpdateQuotationForm from "../../components/Quote/UpdateQuotationForm"
 import formatter from "../../helper/formatter"
 import { useCustomers } from "../../hooks/useCustomers"
 import { useQuotes } from "../../hooks/useQuotes"
@@ -43,6 +44,7 @@ export default function Quote() {
                   </div>
                 ))}
               </div>
+              <UpdateQuotationForm id={quote.id} currentPrice={quote.price} />
             </Card>
           </div>
           <Card title="Customer">
