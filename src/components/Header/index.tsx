@@ -15,7 +15,7 @@ export default function Header() {
           </Link>
         </div>
         <div>
-          <input type="search" />
+          <input type="search" placeholder="Search..." />
           <button type="button">
             <BsBellFill />
           </button>

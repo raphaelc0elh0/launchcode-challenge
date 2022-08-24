@@ -8,6 +8,7 @@
   --white: #ffffff;
   --gray-100: #e1e1e6;
   --gray-300: #a8a8b3;
+  --gray-400: #8d8d96;
   --gray-700: #323238;
   --gray-800: #29292e;
   --gray-900: #121214;
@@ -71,6 +72,10 @@ h6 {
   margin-bottom: 0.5rem;
 }
 
+small {
+  font-size: 0.8rem;
+}
+
 .row {
   display: flex;
   gap: 1rem;
@@ -85,8 +90,16 @@ h6 {
 
 table {
   border-collapse: collapse;
-  margin: 25px 0;
   font-size: 0.9em;
-  font-family: sans-serif;
   min-width: 400px;
+  text-transform: uppercase;
+
+  thead tr {
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 0.5rem 1rem;
+  }
 }

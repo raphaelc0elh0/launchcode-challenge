@@ -1,10 +1,17 @@
 import { Quote, Prisma } from "@prisma/client"
 import { AxiosError } from "axios"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
+import formatter from "../helper/formatter"
 import { api } from "../services/api"
+import { useCustomers } from "./useCustomers"
+
+interface QuoteWithCustomerName extends Quote {
+  name: string
+  formattedPrice: string
+}
 
 interface QuotesContextData {
-  quotes: Quote[]
+  quotes: QuoteWithCustomerName[]
   createQuote: (quote: Omit<Prisma.QuoteCreateInput, "status">) => Promise<void>
 }
 
@@ -15,9 +22,8 @@ interface QuotesProviderProps {
 }
 
 export const QuotesProvider = ({ children }: QuotesProviderProps) => {
+  const { customers } = useCustomers()
   const [quotes, setQuotes] = useState<Quote[]>([])
-
-  console.log(quotes)
 
   useEffect(() => {
     const getAllQuotes = async () => {
@@ -44,7 +50,24 @@ export const QuotesProvider = ({ children }: QuotesProviderProps) => {
     }
   }
 
-  return <QuotesContext.Provider value={{ quotes, createQuote }}>{children}</QuotesContext.Provider>
+  return (
+    <QuotesContext.Provider
+      value={{
+        quotes: quotes.map((quote) => {
+          const customer = customers.find((customer) => customer.id === quote.customerId)
+          return {
+            ...quote,
+            transportation: quote.transportation || "-",
+            formattedPrice: quote.price ? formatter.currency(quote.price) : "-",
+            name: `${customer?.lastName}, ${customer?.firstName}`
+          }
+        }),
+        createQuote
+      }}
+    >
+      {children}
+    </QuotesContext.Provider>
+  )
 }
 
 export const useQuotes = () => {

@@ -1,11 +1,17 @@
-import { FormEventHandler, useState } from "react"
+import { FormEventHandler, useEffect, useState } from "react"
 import { useQuotes } from "../../../hooks/useQuotes"
 import Card from "../../Card"
 import styles from "./styles.module.scss"
 import { FaAngleDoubleRight } from "react-icons/fa"
+import { useCustomers } from "../../../hooks/useCustomers"
+import { api } from "../../../services/api"
 
 export default function AddQuickQuoteCard() {
+  const { customers } = useCustomers()
   const { createQuote } = useQuotes()
+
+  // const [keyword, setKeyword] = useState({ keyword: "", type: "" })
+  // const [airportsSuggestions, setAirportsSuggestions] = useState([])
 
   const [input, setInput] = useState({
     from: "",
@@ -17,9 +23,11 @@ export default function AddQuickQuoteCard() {
     customerId: ""
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const name = e.target.name
     const value = e.target.value
+
+    // handleKeyword(name, value)
     setInput((values) => ({ ...values, [name]: value }))
   }
 
@@ -27,6 +35,27 @@ export default function AddQuickQuoteCard() {
     e.preventDefault()
     createQuote({ ...input, people: Number(input.people) })
   }
+
+  // // handle keyword
+  // const handleKeyword = (name: string, value: string) => {
+  //   setKeyword({ keyword: "", type: "" })
+  //   if (name === "from") setKeyword({ keyword: value, type: "from" })
+  //   if (name === "to") setKeyword({ keyword: value, type: "to" })
+  // }
+
+  // useEffect(() => {
+  //   const getAirportsSuggestions = async () => {
+  //     const response = await api.get(
+  //       `https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT,CITY&keyword=${keyword}&page[limit]=5`
+  //     )
+  //     setAirportsSuggestions(response.data)
+  //   }
+  //   if (keyword.keyword !== "" && keyword.type !== "") {
+  //     getAirportsSuggestions()
+  //   }
+  // }, [keyword])
+
+  // console.log(airportsSuggestions)
 
   return (
     <Card icon={<FaAngleDoubleRight />} title="Quick quote">
@@ -59,17 +88,24 @@ export default function AddQuickQuoteCard() {
         </div>
         <div>
           <label htmlFor="transportation">Transportation</label>
-          <input
-            type="text"
-            name="transportation"
-            id="transportation"
-            value={input.transportation}
-            onChange={handleChange}
-          />
+          <select name="transportation" id="transportation" value={input.transportation} onChange={handleChange}>
+            <option></option>
+            <option value="Rental Car">Rental Car</option>
+            <option value="Shuttle">Shuttle</option>
+            <option value="Train">Train</option>
+            <option value="Taxi">Taxi</option>
+          </select>
         </div>
         <div>
-          <label htmlFor="customerId">Name</label>
-          <input type="text" name="customerId" id="customerId" value={input.customerId} onChange={handleChange} />
+          <label htmlFor="customerId">Customer</label>
+          <select name="customerId" id="customerId" value={input.customerId} onChange={handleChange}>
+            <option></option>
+            {customers.map(({ id, firstName, lastName }) => (
+              <option key={id} value={id}>
+                {lastName}, {firstName}
+              </option>
+            ))}
+          </select>
         </div>
         <button type="submit">Create a quote</button>
       </form>
