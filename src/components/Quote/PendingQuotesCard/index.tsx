@@ -3,7 +3,7 @@ import Card from "../../Card"
 
 export default function PendingQuotesCard() {
   const { quotes } = useQuotes()
-  const pendingQuotes = quotes.filter((quote) => quote.status === "pending")
+  const pendingQuotes = quotes
 
   return (
     <Card icon="icon" title="Pending Quotes" side="X">

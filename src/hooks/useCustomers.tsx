@@ -20,7 +20,7 @@ export const CustomersProvider = ({ children }: CustomersProviderProps) => {
 
   useEffect(() => {
     const getAllCustomers = async () => {
-      const result = await api.get("/customer")
+      const result = await api.get("/customers")
       setCustomers(result.data)
     }
 
