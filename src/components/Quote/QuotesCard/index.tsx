@@ -1,12 +1,13 @@
 import { useQuotes } from "../../../hooks/useQuotes"
 import formatter from "../../../helper/formatter"
 import Card from "../../Card"
+import { BsCurrencyDollar } from "react-icons/bs"
 
 export default function QuotesCard() {
   const { quotes } = useQuotes()
 
   return (
-    <Card icon="icon" title="Quotes" side="X">
+    <Card icon={<BsCurrencyDollar />} title="Quotes">
       <table>
         <thead>
           <tr>

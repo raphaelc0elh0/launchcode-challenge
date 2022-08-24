@@ -12,7 +12,6 @@ export default function Navbar() {
           </a>
         </Link>
       ))}
-      <div>---</div>
       {officeLinks.map(({ icon, label, link }) => (
         <Link key={label} href={link}>
           <a>

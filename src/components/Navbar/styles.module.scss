@@ -5,7 +5,21 @@
   background: var(--gray-100);
 
   a {
+    display: flex;
+    align-items: center;
+
     padding: 2rem;
+
+    background: inherit;
     color: var(--blue-800);
+
+    transition: all 0.2s;
+    &:hover {
+      filter: brightness(0.95);
+    }
+
+    svg {
+      margin-right: 1rem;
+    }
   }
 }

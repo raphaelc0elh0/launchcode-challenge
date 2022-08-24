@@ -1,12 +1,13 @@
 import { useQuotes } from "../../../hooks/useQuotes"
 import Card from "../../Card"
+import { FaRegClock } from "react-icons/fa"
 
 export default function PendingQuotesCard() {
   const { quotes } = useQuotes()
   const pendingQuotes = quotes
 
   return (
-    <Card icon="icon" title="Pending Quotes" side="X">
+    <Card icon={<FaRegClock />} title="Pending Quotes">
       <table>
         <thead>
           <tr>

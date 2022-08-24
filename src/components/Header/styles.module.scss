@@ -8,6 +8,44 @@
   height: 60px;
 
   div {
+    display: flex;
+    align-items: center;
+
+    input[type="search"] {
+      background: var(--gray-100);
+      border: 0;
+      border-radius: 0.25rem;
+      padding: 0.25rem;
+      min-width: 200px;
+
+      transition: all 0.2s;
+      &:focus {
+        padding: 0.4rem 0.25rem;
+        background: var(--white);
+      }
+    }
+
+    button {
+      padding: 0;
+      border: 0;
+      background: transparent;
+
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        filter: brightness(0.8);
+      }
+
+      svg {
+        color: var(--white);
+      }
+
+      img {
+        border-radius: 50%;
+      }
+    }
+
     * {
       &:not(:last-child) {
         margin-right: 2rem;

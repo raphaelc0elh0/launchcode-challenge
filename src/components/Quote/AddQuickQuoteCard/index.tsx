@@ -2,6 +2,7 @@ import { FormEventHandler, useState } from "react"
 import { useQuotes } from "../../../hooks/useQuotes"
 import Card from "../../Card"
 import styles from "./styles.module.scss"
+import { FaAngleDoubleRight } from "react-icons/fa"
 
 export default function AddQuickQuoteCard() {
   const { createQuote } = useQuotes()
@@ -28,7 +29,7 @@ export default function AddQuickQuoteCard() {
   }
 
   return (
-    <Card icon="icon" title="Quick quote" side="X">
+    <Card icon={<FaAngleDoubleRight />} title="Quick quote">
       <form onSubmit={handleSubmit} className={styles.addQuickNoteForm}>
         <div>
           <label htmlFor="from">From</label>
