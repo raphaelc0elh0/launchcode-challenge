@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Launchcode Challenge
 
-## Getting Started
+- [Challenge](#challenge)
+- [Tools Used](#tools-used)
+- [Installation](#installation)
+- [Notes](#notes)
 
-First, run the development server:
+## Challenge
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Launchcode is excited to create the first working prototype for Wet Bat. You've been asked to make a proof of concept to demonstrate a tangible product. This will involve building the minimal quoting functionality as shown in the included design document. As part of the minimal viable product (MVP), this prototype will require a database and frontend application. Additional layers or services can be added as necessary.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+At a minimum, we would like to be able to view a list of quotes and view a detail screen for each quote. A quote should include at least the following information:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Departure & destination location (ideally airports)
+- Departure & return date
+- Number of travellers
+- Transportation during travels (rental car, etc)
+- Contact information
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Tools Used
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- NextJS
+- PrismaORM (with SQLite)
+- Axios
+- React Icons
 
-## Learn More
+## Installation
 
-To learn more about Next.js, take a look at the following resources:
+0. Install it by running `yarn` in the project's root directory
+1. Start DB (and seed) with `yarn db:dev`
+2. Run the project with `yarn start` or `yarn dev`
+3. Build the project with `yarn build`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Since it was an MVP concept, I have focused on tools and implementations to quickly bring functionatilies that could be showcased to the client. Further development needs to be made, to ensure security, reliability and so on.
